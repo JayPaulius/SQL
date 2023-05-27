@@ -44,6 +44,7 @@ WHERE ProductName LIKE '%Samsung%';
 
 SELECT * FROM sql1.new_table
 WHERE ProductName REGEXP '[0-9]+$';
+--WHERE ProductName RLIKE '[0-9]';
 
 -- Товары, в наименовании которых есть ЦИФРА "8"
 
