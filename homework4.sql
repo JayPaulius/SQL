@@ -36,11 +36,16 @@ order by mark;
 -- 100 машин, их них 20 - BMW и 80 машин другой марки ,  AUDI - 30 и 70 машин другой марки, LADA - 15, 85 авто другой марки
 select 
 mark, 
-count(mark) 'количество авто марки', 
-(select count(regnum) from auto) - count(mark) 'количество авто других марок',
-(select count(regnum) from auto) 'общее количество авто'
+count(*) 'количество авто марки', 
+(select count(*) from auto) - count(*) 'количество авто других марок',
+(select count(*) from auto) 'общее количество авто'
 from auto
 group by mark;
+
+SELECT MARK, count(*),  all_auto - count(*)
+FROM AUTO 
+JOIN (SELECT COUNT(*) AS all_auto FROM AUTO ) tab
+GROUP BY MARK, all_auto;
 
 -- 3. Даны 2 таблицы. Напишите запрос, который вернет строки из таблицы test_a, id которых нет в таблице test_b, НЕ используя ключевого слова NOT.
 create table test_a (id int, data varchar(10));
@@ -63,3 +68,7 @@ union all
 select test_b.id from test_b) tbl
 group by tbl.id
 having count(tbl.id) = 1);
+
+SELECT * FROM test_a
+LEFT JOIN test_b on test_b.id = test_a.id
+WHERE test_b.id IS NULL;

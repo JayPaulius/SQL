@@ -89,4 +89,4 @@ select * from table1;
 select *,
 timediff(lead(station_time) over w, station_time) as 'time_to_next_station'
 from table1
-window w as (partition by train_id);
+window w as (partition by train_id order by station_time);
